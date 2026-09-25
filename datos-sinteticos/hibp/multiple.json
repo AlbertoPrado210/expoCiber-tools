@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "account": "multiple-breaches@hibp-integration-tests.com",
+  "is_official_test_account": true,
+  "breach_count": 3,
+  "breaches": [
+    {
+      "name": "Adobe",
+      "title": "Adobe",
+      "domain": "adobe.com",
+      "breach_date": "2013-10-04",
+      "pwn_count": 152445165,
+      "data_classes": [
+        "Email addresses",
+        "Password hints",
+        "Passwords",
+        "Usernames"
+      ],
+      "is_verified": true,
+      "is_unverified": null,
+      "is_spam_list": false
+    },
+    {
+      "name": "Stratfor",
+      "title": "Stratfor",
+      "domain": "stratfor.com",
+      "breach_date": "2011-12-24",
+      "pwn_count": 859777,
+      "data_classes": [
+        "Credit cards",
+        "Email addresses",
+        "Names",
+        "Passwords",
+        "Phone numbers",
+        "Physical addresses",
+        "Usernames"
+      ],
+      "is_verified": true,
+      "is_unverified": null,
+      "is_spam_list": false
+    },
+    {
+      "name": "Gawker",
+      "title": "Gawker",
+      "domain": "gawker.com",
+      "breach_date": "2010-12-11",
+      "pwn_count": 1247574,
+      "data_classes": [
+        "Email addresses",
+        "Passwords",
+        "Usernames"
+      ],
+      "is_verified": true,
+      "is_unverified": null,
+      "is_spam_list": false
+    }
+  ],
+  "backup_created_at": "2026-09-10T17:59:55.671481+00:00"
+}
