@@ -1,17 +1,43 @@
 # expoCiber Tools
 
-Herramientas defensivas en Python para consultar reportes existentes de VirusTotal, reputación pública de direcciones IP en AbuseIPDB y brechas conocidas en Have I Been Pwned.
+Toolkit defensivo en Python para consultar información pública de VirusTotal, AbuseIPDB y Have I Been Pwned sin abrir enlaces sospechosos ni conectarse directamente a las direcciones IP analizadas.
 
-El proyecto acompaña la charla **La ciberseguridad aplicada en la vida diaria**. Su finalidad es educativa: reducir la incertidumbre antes de abrir un enlace, confiar en una dirección IP o reutilizar una contraseña.
+El proyecto acompaña la charla *La ciberseguridad aplicada en la vida diaria* y está diseñado para demostraciones educativas, laboratorios controlados y consultas autorizadas.
 
-## Qué incluye
+## Problema que aborda
 
-- Una consola integrada para ejecutar las tres verificaciones.
-- Consultas pasivas: el código no abre enlaces sospechosos ni se conecta a las IP analizadas.
+El análisis inicial de un indicador suele requerir consultar varias fuentes y explicar correctamente sus límites. Este proyecto unifica tres verificaciones frecuentes en una consola y ofrece datos de ejemplo para realizar demostraciones sin exponer información personal.
+
+## Capacidades
+
+- Consulta de reportes existentes de archivos o URL en VirusTotal.
+- Consulta de reputación pública de direcciones IP en AbuseIPDB.
+- Consulta de brechas conocidas mediante la API de Have I Been Pwned.
+- Modos automático, en vivo y con respaldo local sanitizado.
 - Solicitud oculta de API keys y soporte para variables de entorno.
-- Cuenta oficial de integración de HIBP para practicar sin consultar correos personales.
-- Modo automático, modo en vivo y respaldo local sanitizado cuando existe.
-- Pruebas para validación de entradas, privacidad y funcionamiento sin conexión.
+- Validación de entradas y funcionamiento verificable sin conexión.
+- Pruebas automatizadas y análisis estático con Ruff.
+
+## Arquitectura
+
+```text
+expoCiber-tools/
+|-- demo-python/          Aplicación de consola y pruebas
+|-- datos-sinteticos/     Respuestas sanitizadas para demostraciones
+|-- .env.example          Nombres de variables, sin secretos
+|-- SECURITY.md           Política para reportar problemas de seguridad
+`-- README.md
+```
+
+El flujo general es:
+
+```text
+entrada del usuario
+    -> validación y normalización
+    -> selección de modo
+    -> consulta en vivo o muestra local
+    -> presentación del resultado y sus límites
+```
 
 ## Inicio rápido en Windows
 
@@ -23,7 +49,7 @@ cd demo-python
 ./ejecutar_exposicion.ps1
 ```
 
-Para ejecutar únicamente una herramienta:
+Para ejecutar una herramienta específica:
 
 ```powershell
 ./.venv/Scripts/python.exe consultar_virustotal.py --sample asyncrat --mode auto
@@ -31,11 +57,11 @@ Para ejecutar únicamente una herramienta:
 ./.venv/Scripts/python.exe consultar_hibp.py --sample multiple --mode auto
 ```
 
-## API keys
+## Configuración de API keys
 
-VirusTotal y AbuseIPDB requieren una API key personal para las consultas en vivo. La aplicación puede solicitarla mediante una entrada oculta y la mantiene únicamente en memoria durante la ejecución.
+VirusTotal y AbuseIPDB requieren una API key para las consultas en vivo. La aplicación puede solicitarla mediante una entrada oculta y mantenerla únicamente en memoria durante la ejecución.
 
-También puedes definir variables de entorno temporales:
+También se pueden definir variables de entorno temporales:
 
 ```powershell
 $env:VT_API_KEY = "tu_clave"
@@ -43,23 +69,9 @@ $env:ABUSEIPDB_API_KEY = "tu_clave"
 $env:HIBP_API_KEY = "tu_clave"
 ```
 
-No guardes claves reales en `.env`, capturas, notebooks, historial de terminal o commits. El archivo `.env.example` contiene solamente nombres de variables vacías.
+No deben guardarse claves reales en archivos `.env`, capturas, notebooks, historial de terminal ni commits. `.env.example` contiene únicamente los nombres de las variables esperadas.
 
-## Límites de interpretación
-
-- VirusTotal reúne detecciones y reputación. Una ausencia de detecciones no garantiza seguridad.
-- AbuseIPDB reúne reportes públicos. Su puntuación no identifica a una persona ni demuestra por sí sola que una conexión sea hostil.
-- HIBP informa exposiciones conocidas. Una coincidencia no demuestra que la contraseña actual siga comprometida.
-
-## Uso responsable
-
-- Consulta solamente indicadores que tengas autorización para revisar.
-- No visites, descargues ni ejecutes muestras maliciosas.
-- No consultes correos de terceros sin autorización expresa.
-- Respeta los términos, las cuotas y las políticas de cada API.
-- Si una credencial aparece en un repositorio, revócala o rótala antes de limpiar el historial.
-
-## Pruebas
+## Pruebas y calidad
 
 ```powershell
 cd demo-python
@@ -67,9 +79,26 @@ cd demo-python
 ./.venv/Scripts/python.exe -m ruff check .
 ```
 
+Las pruebas cubren validación de entradas, privacidad y comportamiento sin conexión.
+
+## Límites de interpretación
+
+- Una ausencia de detecciones en VirusTotal no demuestra que un recurso sea seguro.
+- La puntuación de AbuseIPDB se basa en reportes públicos y no identifica por sí sola a una persona ni confirma una actividad hostil.
+- Una coincidencia en Have I Been Pwned informa una exposición conocida, pero no demuestra que una contraseña actual siga comprometida.
+- Los resultados deben combinarse con contexto, fuentes adicionales y procedimientos de respuesta autorizados.
+
+## Uso autorizado
+
+- Consultar únicamente indicadores cuya revisión esté autorizada.
+- No visitar, descargar ni ejecutar muestras sospechosas.
+- No consultar cuentas de terceros sin autorización expresa.
+- Respetar los términos, cuotas y políticas de cada API.
+- Revocar cualquier credencial expuesta antes de limpiar el historial del repositorio.
+
 ## Fuentes oficiales
 
-- VirusTotal: <https://docs.virustotal.com/reference/overview>
-- AbuseIPDB: <https://docs.abuseipdb.com/>
-- Have I Been Pwned: <https://haveibeenpwned.com/API/v3>
+- [VirusTotal API](https://docs.virustotal.com/reference/overview)
+- [AbuseIPDB API](https://docs.abuseipdb.com/)
+- [Have I Been Pwned API](https://haveibeenpwned.com/API/v3)
 
