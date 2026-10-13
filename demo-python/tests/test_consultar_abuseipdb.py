@@ -1,5 +1,4 @@
 import pytest
-
 from consultar_abuseipdb import DemoError, sanitize_report, validate_public_ip
 
 

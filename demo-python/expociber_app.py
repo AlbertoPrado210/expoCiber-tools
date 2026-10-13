@@ -7,16 +7,15 @@ import sys
 from dataclasses import dataclass
 from typing import Any
 
+import consultar_abuseipdb as abuse
+import consultar_hibp as hibp
+import consultar_virustotal as vt
 from rich import box
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
 from rich.table import Table
 from rich.text import Text
-
-import consultar_abuseipdb as abuse
-import consultar_hibp as hibp
-import consultar_virustotal as vt
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")

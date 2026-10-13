@@ -17,6 +17,7 @@ El análisis inicial de un indicador suele requerir consultar varias fuentes y e
 - Solicitud oculta de API keys y soporte para variables de entorno.
 - Validación de entradas y funcionamiento verificable sin conexión.
 - Pruebas automatizadas y análisis estático con Ruff.
+- Integración continua en GitHub Actions para cada cambio y pull request.
 
 ## Arquitectura
 
@@ -80,6 +81,7 @@ cd demo-python
 ```
 
 Las pruebas cubren validación de entradas, privacidad y comportamiento sin conexión.
+El mismo control se ejecuta automáticamente mediante GitHub Actions.
 
 ## Límites de interpretación
 

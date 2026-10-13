@@ -1,5 +1,4 @@
 import pytest
-
 from consultar_hibp import (
     DemoError,
     is_test_account,
